@@ -1,14 +1,20 @@
+
+body{
+    font-weight: 300;
+    /* text-align: center; */
+}
+
 div{
     background-color: yellow;
     height: 20px;
     width: 20px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 } 
 
 .grid{
     background-color: aqua;
-    height: 420px;
-    width: 220px;
+    height: 400px;
+    width: 200px;
     display: flex;
     flex-wrap: wrap;
 

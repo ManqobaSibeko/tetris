@@ -4,9 +4,12 @@ document.addEventListener('DOMContentLoaded',(e) => {
     // alert('g')
     console.dir(e)
     const startBtn = document.querySelector('button')
+    const ScoreDisplay = document.querySelector('#score')
     const grid =document.querySelector('.grid')
+    var square 
     const displaySquares =document.querySelectorAll('.previous-grid div')
     let squares = Array.from(grid.querySelectorAll("div"))
+    let score = 0;
 
     const width = 10
     const height = 20
@@ -73,6 +76,10 @@ document.addEventListener('DOMContentLoaded',(e) => {
        ]
        const theTetromonoes = [lTetromino,zTetromino,tTetromino,oTetromino,iTetromino]
 
+       var shapes = ['circle','square','triangle']
+
+       console.log (theTetromonoes.concat(shapes))
+
 
     //    randomly selecting tTetromonoes
        let random = Math.floor(Math.random()*theTetromonoes.length)
@@ -101,7 +108,7 @@ document.addEventListener('DOMContentLoaded',(e) => {
     // move down shape
     function moveDown(){
         undraw()
-        currentPosition = currentPosition += width
+        currentPosition += width
         draw()
         freeze()
     }
@@ -187,6 +194,7 @@ function freeze(){
         currentPosition =4
         draw()
         displayShape()
+        addScore()
     }
 }
 
@@ -205,7 +213,25 @@ startBtn.addEventListener('click',() => {
 })
 
 
+// add score
 
+function addScore(){
+    for (let i = 0; i < 199; i  +=width) {
+        const row = [i,i+1,i+2,i+3,i+4,i+5,i+6,i+7,i+8,i+9]
+
+        if(row.every(index => squares[index].classList.contains('taken'))){
+            score +=10
+            ScoreDisplay.innerHTML =score
+            row.forEach(index =>{
+                squares[index].classList.remove('taken')
+            })
+            const squaresRemoved = squares.splice(i,width)
+            square =squaresRemoved.concat(squares)
+            squares.forEach(cell=>grid.appendChild(cell))
+        }
+        
+    }
+}
 
 
 
